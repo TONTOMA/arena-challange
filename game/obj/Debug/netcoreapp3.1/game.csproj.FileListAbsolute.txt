@@ -1,0 +1,13 @@
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.exe
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.deps.json
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.runtimeconfig.json
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.runtimeconfig.dev.json
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.dll
+C:\Users\tonto\Desktop\Grinds\game\game\bin\Debug\netcoreapp3.1\game.pdb
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.csprojAssemblyReference.cache
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.AssemblyInfoInputs.cache
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.AssemblyInfo.cs
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.csproj.CoreCompileInputs.cache
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.dll
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.pdb
+C:\Users\tonto\Desktop\Grinds\game\game\obj\Debug\netcoreapp3.1\game.genruntimeconfig.cache
