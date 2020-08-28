@@ -4,7 +4,7 @@ using System.Text;
 
 namespace game
 {
-    class Character
+    public class Character
     {
         public string Name { set; get; }
         public int Health { set; get; }
@@ -12,39 +12,65 @@ namespace game
         public int Accuracy { set; get; }
     }
 
-    class Player : Character
+    public class Player : Character
     {
 
     }
 
-    class Enemy : Character
+    public class Enemy : Character
     {
 
     }
 
-    static class Enemies
+    public static class Enemies
     {
-        public static Enemy JimmyTheGoblin { get; set; }
-        public static Enemy JoshTheBoss { get; set; }
+        public static Dictionary<string, Enemy> EnemyList = new Dictionary<string, Enemy>();
+
+        private static Enemy jimmyTheGoblin;
+        private static Enemy joshTheBoss;
+        private static Enemy sarahTheDestroyer;
+        private static Enemy karenTheEntitled;
 
         static Enemies()
-        {
+        {    
             // Make into list of 
-            JimmyTheGoblin = new Enemy()
+            jimmyTheGoblin = new Enemy()
             {
                 Name = "Jimmy",
                 Health = 60,
                 Weapon = Weapons.Claw,
                 Accuracy = 5
             };
+            EnemyList.Add("Jimmy", jimmyTheGoblin);
 
-            JoshTheBoss = new Enemy()
+            joshTheBoss = new Enemy()
             {
                 Name = "Josh",
                 Health = 200,
                 Weapon = Weapons.Axe,
                 Accuracy = 8
+                
             };
+            EnemyList.Add("Josh", joshTheBoss);
+
+            sarahTheDestroyer = new Enemy()
+            {
+                Name = "Sarah",
+                Health = 80,
+                Weapon = Weapons.Sword,
+                Accuracy = 7
+            };
+            EnemyList.Add("Sarah", sarahTheDestroyer);
+
+            karenTheEntitled = new Enemy()
+            {
+                Name = "Karen",
+                Health = 80,
+                Weapon = Weapons.Claw,
+                Accuracy = 8
+
+            };
+            EnemyList.Add("Karen", karenTheEntitled);
         }
     }
 }

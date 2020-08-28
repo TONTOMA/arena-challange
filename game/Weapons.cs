@@ -4,13 +4,13 @@ using System.Text;
 
 namespace game
 {
-    class Weapon
+    public class Weapon
     {
         public string Name { get; set; }
         public int Damage { get; set; }
     }
 
-    static class Weapons
+    public static class Weapons
     {
         public static Weapon Fist { get; set; }
         public static Weapon Sword { get; set; }

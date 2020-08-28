@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tonto\\Desktop\\Grinds\\game\\game\\game.csproj": {}
+    "C:\\Users\\tonto\\Desktop\\GitHubStuff\\arena-challange\\game\\game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tonto\\Desktop\\Grinds\\game\\game\\game.csproj": {
+    "C:\\Users\\tonto\\Desktop\\GitHubStuff\\arena-challange\\game\\game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tonto\\Desktop\\Grinds\\game\\game\\game.csproj",
+        "projectUniqueName": "C:\\Users\\tonto\\Desktop\\GitHubStuff\\arena-challange\\game\\game.csproj",
         "projectName": "game",
-        "projectPath": "C:\\Users\\tonto\\Desktop\\Grinds\\game\\game\\game.csproj",
+        "projectPath": "C:\\Users\\tonto\\Desktop\\GitHubStuff\\arena-challange\\game\\game.csproj",
         "packagesPath": "C:\\Users\\tonto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tonto\\Desktop\\Grinds\\game\\game\\obj\\",
+        "outputPath": "C:\\Users\\tonto\\Desktop\\GitHubStuff\\arena-challange\\game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tonto\\AppData\\Roaming\\NuGet\\NuGet.Config",
