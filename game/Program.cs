@@ -6,7 +6,13 @@ namespace game
 {
     class Program
     {
+        // Merge 2 fight functions. 
+        // Player accuracy - modifies weapon accuracy.
+        // Amour - Percentage reduction on damage taken. 
+        // List of weapons before fight, can equip. 
+
         static Player player;
+        static Enemy enemy;
 
         static void Main(string[] args)
         {
@@ -15,13 +21,9 @@ namespace game
                 Name = "Player",
                 Health = 100,
                 Weapon = Weapons.Fist,
-                Accuracy = 6
+                // Accuracy = 6
+                // Armour
             };
-
-            // TEST CODE!
-            //Fight();
-            // END TEST CODE!
-           
 
             Console.WriteLine("Welcome to Gregs Battle Arena");
             Console.Write("Choose your name: ");
@@ -88,55 +90,114 @@ namespace game
 
         static void Fight()
         {
+            Console.WriteLine("Weapons");
+
+            for(int i=0; i<Weapons.WeaponList.Count; i++) //// colin will explain
+            {
+                Console.WriteLine(i+1 + ". " + Weapons.WeaponList.Values.ElementAt(i).Name);  /// colin will explain
+            }
+
+            Console.Write("Choose a weapon:");
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            player.Weapon = Weapons.WeaponList.Values.ElementAt(option-1);
+
             ClearConsole();
             int rand = RollDice(Enemies.EnemyList.Count);
 
-            Enemy enemy = Enemies.EnemyList.Values.ElementAt(rand);
+            enemy = Enemies.EnemyList.Values.ElementAt(rand);
 
             PlayerStats();
             Console.WriteLine("\nVS");
             EnemyStats(enemy);
 
-            while(player.Health > 0 && enemy.Health > 0)
+            string currentAttacker;
+
+            if(RollDice() <= 6)
             {
-                if (RollDice() <= enemy.Accuracy)
-                {
-                    player.Health -= enemy.Weapon.Damage;
-                    Console.WriteLine("{0} hits {1} for {2} Damage", enemy.Name, player.Name, enemy.Weapon.Damage);
-                }
-                else
-                {
-                    Console.WriteLine("{0} Missed!", enemy.Name);
-                }
+                currentAttacker = "player";
 
-                if (RollDice() <= player.Accuracy)
-                {
-                    enemy.Health -= player.Weapon.Damage;
-                    Console.WriteLine("{0} hits {1} for {2} Damage", player.Name, enemy.Name, player.Weapon.Damage);
-                }
-                else
-                {
-                    string msg = String.Format("{0} Missed!", player.Name);
-                    WriteText(msg, "red");
-                }
+                string msg = String.Format("\n{0} attacks first\n\n", player.Name);
+                WriteText(msg, "blue");
+                PlayerAttack();
 
-                Console.WriteLine("\n");
-                Thread.Sleep(1000);
-            }
-
-            if (player.Health <= 0)
-            {
-                WriteText("You Lost!", "red");
             }
             else
             {
-                WriteText("You won!", "blue");
+                currentAttacker = "enemy";
+
+                string msg = String.Format("\n{0} attacks first\n\n", enemy.Name);
+                WriteText(msg, "blue");
+                EnemyAttack();
+                
+            }
+
+            Console.WriteLine("\n");
+
+            while (player.Health > 0 && enemy.Health > 0)
+            { 
+                if(currentAttacker == "player")
+                {
+                    EnemyAttack();
+                    currentAttacker = "enemy";
+                }
+                else if(currentAttacker == "enemy")
+                {
+                    PlayerAttack();
+                    currentAttacker = "player";
+                }
+
+                Console.WriteLine("\n");
+                Thread.Sleep(800);
+            }
+
+            if (player.Health <= 0 && enemy.Health <= 0)
+            {
+                WriteText("Draw, you are both dead!\n", "blue");
+            }
+            else if (player.Health <= 0)
+            {
+                WriteText("You lost!\n", "blue");
+            }
+            else
+            {
+                WriteText("You won!\n", "blue");
             }
 
             PlayerStats();
             EnemyStats(enemy);
 
             Wait();
+        }
+
+        static void PlayerAttack() 
+        {
+            if (RollDice() <= player.Weapon.Accuracy)
+            {
+                enemy.Health -= player.Weapon.Damage;
+                string msg = String.Format("\n{0} hits {1} for {2} Damage", player.Name, enemy.Name, player.Weapon.Damage);
+                WriteText(msg, "green");
+            }
+            else
+            {
+                string msg = String.Format("\n{0} Missed!", player.Name);
+                WriteText(msg, "red");
+            }
+        }
+
+        static void EnemyAttack()
+        {
+            if (RollDice() <= enemy.Weapon.Accuracy)
+            {
+                player.Health -= enemy.Weapon.Damage;
+                string msg = String.Format("\n{0} hits {1} for {2} Damage", enemy.Name, player.Name, enemy.Weapon.Damage);
+                WriteText(msg, "red");
+            }
+            else
+            {
+                string msg = String.Format("\n{0} Missed!", enemy.Name);
+                WriteText(msg, "green");
+            }
         }
 
         static void Shop()

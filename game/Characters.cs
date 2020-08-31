@@ -9,7 +9,7 @@ namespace game
         public string Name { set; get; }
         public int Health { set; get; }
         public Weapon Weapon { set; get; }
-        public int Accuracy { set; get; }
+        //public int Accuracy { set; get; }
     }
 
     public class Player : Character
@@ -33,13 +33,13 @@ namespace game
 
         static Enemies()
         {    
-            // Make into list of 
+            
             jimmyTheGoblin = new Enemy()
             {
                 Name = "Jimmy",
                 Health = 60,
                 Weapon = Weapons.Claw,
-                Accuracy = 5
+                //Accuracy = 5
             };
             EnemyList.Add("Jimmy", jimmyTheGoblin);
 
@@ -48,7 +48,7 @@ namespace game
                 Name = "Josh",
                 Health = 200,
                 Weapon = Weapons.Axe,
-                Accuracy = 8
+                //Accuracy = 8
                 
             };
             EnemyList.Add("Josh", joshTheBoss);
@@ -58,7 +58,7 @@ namespace game
                 Name = "Sarah",
                 Health = 80,
                 Weapon = Weapons.Sword,
-                Accuracy = 7
+                //Accuracy = 7
             };
             EnemyList.Add("Sarah", sarahTheDestroyer);
 
@@ -67,7 +67,7 @@ namespace game
                 Name = "Karen",
                 Health = 80,
                 Weapon = Weapons.Claw,
-                Accuracy = 8
+                //Accuracy = 8
 
             };
             EnemyList.Add("Karen", karenTheEntitled);
