@@ -21,8 +21,8 @@ namespace game
                 Name = "Player",
                 Health = 100,
                 Weapon = Weapons.Fist,
+                Armour = 30
                 // Accuracy = 6
-                // Armour
             };
 
             Console.WriteLine("Welcome to Gregs Battle Arena");
@@ -59,9 +59,11 @@ namespace game
 
             while (loop)
             {
+                ClearConsole();
                 Console.WriteLine("1. Fight");
-                Console.WriteLine("2. Shop");
-                Console.WriteLine("3. View Stats");
+                Console.WriteLine("2. Equipment");
+                //Console.WriteLine("3. Shop");
+                Console.WriteLine("4. View Stats");
                 Console.WriteLine("9. Quit");
 
                 Console.Write("Enter Option: ");
@@ -73,7 +75,7 @@ namespace game
                         Fight();
                         break;
                     case "2":
-                        Shop();
+                        Equipment();
                         break;
                     case "3":
                         PlayerStats();
@@ -86,25 +88,14 @@ namespace game
                         break;
                 }
             }
+
         }
 
         static void Fight()
         {
-            Console.WriteLine("Weapons");
-
-            for(int i=0; i<Weapons.WeaponList.Count; i++) //// colin will explain
-            {
-                Console.WriteLine(i+1 + ". " + Weapons.WeaponList.Values.ElementAt(i).Name);  /// colin will explain
-            }
-
-            Console.Write("Choose a weapon:");
-            int option = Convert.ToInt32(Console.ReadLine());
-
-            player.Weapon = Weapons.WeaponList.Values.ElementAt(option-1);
-
-            ClearConsole();
+            ChooseWeapon();
+    
             int rand = RollDice(Enemies.EnemyList.Count);
-
             enemy = Enemies.EnemyList.Values.ElementAt(rand);
 
             PlayerStats();
@@ -120,7 +111,6 @@ namespace game
                 string msg = String.Format("\n{0} attacks first\n\n", player.Name);
                 WriteText(msg, "blue");
                 PlayerAttack();
-
             }
             else
             {
@@ -168,14 +158,20 @@ namespace game
             EnemyStats(enemy);
 
             Wait();
+
+            Main();
+
         }
 
         static void PlayerAttack() 
         {
             if (RollDice() <= player.Weapon.Accuracy)
             {
-                enemy.Health -= player.Weapon.Damage;
-                string msg = String.Format("\n{0} hits {1} for {2} Damage", player.Name, enemy.Name, player.Weapon.Damage);
+                int netDamage = (int)(player.Weapon.Damage * (1 - (enemy.Armour * 0.7) / 100));
+                enemy.Health -= netDamage;  // cast- converts all inside into an integer
+
+                string msg = String.Format("\n{0} hits {1} for {2} Damage", player.Name, enemy.Name, netDamage);
+
                 WriteText(msg, "green");
             }
             else
@@ -189,8 +185,10 @@ namespace game
         {
             if (RollDice() <= enemy.Weapon.Accuracy)
             {
-                player.Health -= enemy.Weapon.Damage;
-                string msg = String.Format("\n{0} hits {1} for {2} Damage", enemy.Name, player.Name, enemy.Weapon.Damage);
+                int netDamage = (int)(enemy.Weapon.Damage * (1 - (player.Armour * 0.7) / 100));
+                player.Health -= netDamage;  // cast- converts all inside into an integer
+
+                string msg = String.Format("\n{0} hits {1} for {2} Damage", enemy.Name, player.Name, netDamage);
                 WriteText(msg, "red");
             }
             else
@@ -198,6 +196,62 @@ namespace game
                 string msg = String.Format("\n{0} Missed!", enemy.Name);
                 WriteText(msg, "green");
             }
+        }
+
+        static void ChooseWeapon()
+        {
+            Console.WriteLine("Weapons");
+
+            for (int i = 0; i < Weapons.WeaponList.Count; i++) //// colin will explain
+            {
+                Console.WriteLine(i + 1 + ". " + Weapons.WeaponList.Values.ElementAt(i).Name);  /// colin will explain 
+            }
+
+            Console.Write("Choose a weapon: ");
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            player.Weapon = Weapons.WeaponList.Values.ElementAt(option - 1);
+
+            ClearConsole();
+
+        }
+
+        static void Equipment()
+        {
+            bool loop = true;
+
+            while(loop)
+            {
+                ClearConsole();
+                PlayerStats();
+                Console.WriteLine("\n");
+                Console.WriteLine("1. Weapon: {0}", player.Weapon.Name);
+                Console.WriteLine("2. Helmet: {0}", "No helmet");
+                Console.WriteLine("3. Body Armour: {0}", "No body armour");
+                Console.WriteLine("9. Return to Main Menu");
+
+                Console.Write("Enter Option: ");
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "9":
+                        loop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect Option!");
+                        break;
+                }
+            }   
         }
 
         static void Shop()
@@ -208,7 +262,8 @@ namespace game
 
         static void PlayerStats()
         {
-            Console.WriteLine("\nName: {0} | Health: {1} | Weapon: {2}", player.Name, player.Health, player.Weapon.Name);
+            Console.WriteLine("\nName: {0} | Health: {1} | Armour: {2}\nWeapon: {3} | Damage: {4}\n", player.Name, player.Health, player.Armour, player.Weapon.Name, player.Weapon.Damage);
+
         }
 
         static void EnemyStats(Enemy enemy)
@@ -259,8 +314,3 @@ namespace game
         }
     }
 }
-
-// Finish colours
-// add who hits first, 
-// add turns
-// add more stats (Initiative?)

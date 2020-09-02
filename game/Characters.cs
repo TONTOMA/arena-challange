@@ -8,6 +8,7 @@ namespace game
     {
         public string Name { set; get; }
         public int Health { set; get; }
+        public int Armour { set; get; }
         public Weapon Weapon { set; get; }
         //public int Accuracy { set; get; }
     }
@@ -38,6 +39,7 @@ namespace game
             {
                 Name = "Jimmy",
                 Health = 60,
+                Armour = 20,
                 Weapon = Weapons.Claw,
                 //Accuracy = 5
             };
@@ -47,6 +49,7 @@ namespace game
             {
                 Name = "Josh",
                 Health = 200,
+                Armour = 90,
                 Weapon = Weapons.Axe,
                 //Accuracy = 8
                 
@@ -57,6 +60,7 @@ namespace game
             {
                 Name = "Sarah",
                 Health = 80,
+                Armour = 20,
                 Weapon = Weapons.Sword,
                 //Accuracy = 7
             };
@@ -66,6 +70,7 @@ namespace game
             {
                 Name = "Karen",
                 Health = 80,
+                Armour = 35,
                 Weapon = Weapons.Claw,
                 //Accuracy = 8
 
