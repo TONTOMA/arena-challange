@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+// al t + left mouse
 namespace game
 {
     public class Character
@@ -10,32 +10,47 @@ namespace game
         public int Health { set; get; }
         public int Armour { set; get; }
         public Weapon Weapon { set; get; }
-        //public int Accuracy { set; get; }
-    }
 
-    public class Player : Character
-    {
+        public void Attack(Character enemy)
+        {
+            var num = Helpers.RollDice();
+                
+            if(num <= Weapon.Accuracy)
+            {
+                int netDamage = (int)(Weapon.Damage * (1 - (enemy.Armour * 0.7) / 100));
+                enemy.Health -= netDamage;
+                Console.WriteLine("{0} attacks {1} for {2} damage", Name, enemy.Name, netDamage);
+            }
+            else
+            {
+                Console.WriteLine("{0} Missed!", Name);
+            }
+        }
 
-    }
-
-    public class Enemy : Character
-    {
-
+        public void Stats()
+        {
+            Console.WriteLine("\nName: {0} | Health: {1} | Armour: {2}\nWeapon: {3} | Damage: {4}\n", Name, Health, Armour, Weapon.Name, Weapon.Damage);
+        }        
+        
+        public void Equip(Weapon weapon)
+        {
+            Weapon = weapon;
+        }
     }
 
     public static class Enemies
     {
-        public static Dictionary<string, Enemy> EnemyList = new Dictionary<string, Enemy>();
+        public static Dictionary<string, Character> List = new Dictionary<string, Character>();
 
-        private static Enemy jimmyTheGoblin;
-        private static Enemy joshTheBoss;
-        private static Enemy sarahTheDestroyer;
-        private static Enemy karenTheEntitled;
+        private static Character joshTheBoss;
+        private static Character jimmyTheGoblin;
+        private static Character sarahTheDestroyer;
+        private static Character karenTheEntitled;
 
         static Enemies()
         {    
             
-            jimmyTheGoblin = new Enemy()
+            jimmyTheGoblin = new Character()
             {
                 Name = "Jimmy",
                 Health = 60,
@@ -43,9 +58,9 @@ namespace game
                 Weapon = Weapons.Claw,
                 //Accuracy = 5
             };
-            EnemyList.Add("Jimmy", jimmyTheGoblin);
+            List.Add("Jimmy", jimmyTheGoblin);
 
-            joshTheBoss = new Enemy()
+            joshTheBoss = new Character()
             {
                 Name = "Josh",
                 Health = 200,
@@ -54,9 +69,9 @@ namespace game
                 //Accuracy = 8
                 
             };
-            EnemyList.Add("Josh", joshTheBoss);
+            List.Add("Josh", joshTheBoss);
 
-            sarahTheDestroyer = new Enemy()
+            sarahTheDestroyer = new Character()
             {
                 Name = "Sarah",
                 Health = 80,
@@ -64,9 +79,9 @@ namespace game
                 Weapon = Weapons.Sword,
                 //Accuracy = 7
             };
-            EnemyList.Add("Sarah", sarahTheDestroyer);
+            List.Add("Sarah", sarahTheDestroyer);
 
-            karenTheEntitled = new Enemy()
+            karenTheEntitled = new Character()
             {
                 Name = "Karen",
                 Health = 80,
@@ -75,7 +90,7 @@ namespace game
                 //Accuracy = 8
 
             };
-            EnemyList.Add("Karen", karenTheEntitled);
+            List.Add("Karen", karenTheEntitled);
         }
     }
 }

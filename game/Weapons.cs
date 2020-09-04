@@ -13,7 +13,7 @@ namespace game
 
     public static class Weapons
     {
-        public static Dictionary<string, Weapon> WeaponList = new Dictionary<string, Weapon>();
+        public static Dictionary<string, Weapon> List = new Dictionary<string, Weapon>();
 
         public static Weapon Fist { get; set; }
         public static Weapon Sword { get; set; }
@@ -28,7 +28,7 @@ namespace game
                 Damage = 10,
                 Accuracy = 11
             };
-            WeaponList.Add(Fist.Name, Fist);
+            List.Add(Fist.Name, Fist);
 
             Claw = new Weapon()
             {
@@ -36,7 +36,7 @@ namespace game
                 Damage = 15,
                 Accuracy = 9
             };
-            WeaponList.Add(Claw.Name, Claw);
+            List.Add(Claw.Name, Claw);
 
             Sword = new Weapon()
             {
@@ -44,7 +44,7 @@ namespace game
                 Damage = 30,
                 Accuracy = 8
             };
-            WeaponList.Add(Sword.Name, Sword);
+            List.Add(Sword.Name, Sword);
 
             Axe = new Weapon()
             {
@@ -52,7 +52,7 @@ namespace game
                 Damage = 50,
                 Accuracy = 6
             };
-            WeaponList.Add(Axe.Name, Axe);
+            List.Add(Axe.Name, Axe);
         }
     }
 }
